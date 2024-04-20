@@ -33,7 +33,7 @@ window.onload = function() {
                 "Country Area": data.country_area + ' km²',
                 "Temperature": "",
                 "Weather": "",
-                "Approximate Location (25km Radius)": ""
+                "Approximate Location (20km Radius)": ""
             };
 
             
@@ -51,7 +51,7 @@ window.onload = function() {
                 color: '#00ff00',
                 fillColor: '#00ff00', 
                 fillOpacity: 0.2,
-                radius: 25000 
+                radius: 20000 
             }).addTo(map);
 
             let formattedLocation = "Approximate Location:\n";

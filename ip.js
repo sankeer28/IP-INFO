@@ -33,12 +33,10 @@ window.onload = function() {
                 "Country Area": data.country_area + ' km²',
                 "Temperature": "",
                 "Weather": "",
-                "Approximate Location (20km Radius)": ""
+                "Approximate Location (10km Radius)": ""
             };
 
-            
-
-            var map = L.map('mapid', { attributionControl: false }).setView([approximateLocation.Latitude, approximateLocation.Longitude], 9.4);
+            var map = L.map('mapid', { attributionControl: false }).setView([approximateLocation.Latitude, approximateLocation.Longitude], 10);
 
             var Jawg_Matrix = L.tileLayer('https://tile.jawg.io/jawg-matrix/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
                 attribution: '<a href="https://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -47,11 +45,11 @@ window.onload = function() {
                 accessToken: 'yN0ESgFsBwgdpSy0MoyaFsDI66mXptDz4cWH0wArMflMJCBK7TkuyjQY8OtqEViZ'
             }).addTo(map);
 
-            L.circle([approximateLocation.Latitude, approximateLocation.Longitude], {
+            const circle = L.circle([approximateLocation.Latitude, approximateLocation.Longitude], {
                 color: '#00ff00',
                 fillColor: '#00ff00', 
                 fillOpacity: 0.2,
-                radius: 20000 
+                radius: 10000 
             }).addTo(map);
 
             let formattedLocation = "Approximate Location:\n";
@@ -82,25 +80,24 @@ window.onload = function() {
                 });
 
             fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${approximateLocation.Latitude}&lon=${approximateLocation.Longitude}&appid=1c86a55ad041297a64544ba7c3f2d094`)
-            .then(response => response.json())
-            .then(weatherData => {
-                const temperatureK = weatherData.main.temp;
-                const temperatureC = (temperatureK - 273.15).toFixed(2);
-                const temperatureF = ((temperatureK - 273.15) * 9/5 + 32).toFixed(2);
-                const currentCondition = weatherData.weather[0].main;
-                approximateLocation.Weather = `${currentCondition}`;
-                approximateLocation.Temperature = `${temperatureC}°C / ${temperatureF}°F`;
-                let formattedLocation = "\n";
-                for (const [key, value] of Object.entries(approximateLocation)) {
-                    formattedLocation += `${key}: ${value}\n`;
-                }
-                document.getElementById("approxLocation").textContent = formattedLocation;
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.getElementById("approxLocation").textContent = "Failed to retrieve weather data";
-            });
-
+                .then(response => response.json())
+                .then(weatherData => {
+                    const temperatureK = weatherData.main.temp;
+                    const temperatureC = (temperatureK - 273.15).toFixed(2);
+                    const temperatureF = ((temperatureK - 273.15) * 9/5 + 32).toFixed(2);
+                    const currentCondition = weatherData.weather[0].main;
+                    approximateLocation.Weather = `${currentCondition}`;
+                    approximateLocation.Temperature = `${temperatureC}°C / ${temperatureF}°F`;
+                    let formattedLocation = "\n";
+                    for (const [key, value] of Object.entries(approximateLocation)) {
+                        formattedLocation += `${key}: ${value}\n`;
+                    }
+                    document.getElementById("approxLocation").textContent = formattedLocation;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById("approxLocation").textContent = "Failed to retrieve weather data";
+                });
 
             var startTime = new Date().getTime();
             fetch(document.location.origin)
@@ -116,9 +113,12 @@ window.onload = function() {
                 .catch(function(error) {
                     console.error('Error:', error);
                 });
-            
 
-
+            const toggle = document.getElementById("radiusToggle");
+            toggle.addEventListener("change", function() {
+                const newRadius = this.checked ? 25000 : 10000; 
+                circle.setRadius(newRadius);
+            });
         })
         .catch(error => {
             console.error('Error:', error);

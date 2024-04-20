@@ -12,17 +12,26 @@
 <body>
 
 <div id="terminal">
-<h1>_ ___    _ __ _ ____ ____
+    <h1>
+_ ___    _ __ _ ____ ____
 | |--'   | | \| |--- [__]    
-</h1>
-<h4>Information collectable through IP</h4>
-<a href="https://github.com/sankeer28/IP-INFO">GitHub</a>
+    </h1>
+    <h4>Information collectable through IP</h4>
+    <a href="https://github.com/sankeer28/IP-INFO">GitHub</a>
     <p id="currentTime"></p>
     <pre id="approxLocation"></pre>
     <p id="ipAddress"></p> 
+    
 </div>
 
+
 <div id="mapid"></div>
+
+<div id="toggleRadius">
+    <label for="radiusToggle">Check if using mobile data (25km Radius)</label>
+    <input type="checkbox" id="radiusToggle">
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/ping.js@0.2.2"></script>
 <script src="ip.js"></script>
 

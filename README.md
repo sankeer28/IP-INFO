@@ -1,6 +1,6 @@
 # IP INFO
 
-IP INFO is a web application that provides information about time, location, network, and weather based on the user's IP address. It utilizes various APIs and libraries to fetch and display the data in an interactive and informative manner.
+IP INFO is a web application that provides information about time, location, network, and weather, based only on the user's IP address.
 
 
 <p align="center">

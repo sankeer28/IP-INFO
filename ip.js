@@ -33,12 +33,12 @@ window.onload = function() {
                 "Country Area": data.country_area + ' km²',
                 "Temperature": "",
                 "Weather": "",
-                "Approximate Location (10km Radius)": ""
+                "Approximate Location (25km Radius)": ""
             };
 
             
 
-            var map = L.map('mapid', { attributionControl: false }).setView([approximateLocation.Latitude, approximateLocation.Longitude], 10);
+            var map = L.map('mapid', { attributionControl: false }).setView([approximateLocation.Latitude, approximateLocation.Longitude], 9.4);
 
             var Jawg_Matrix = L.tileLayer('https://tile.jawg.io/jawg-matrix/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
                 attribution: '<a href="https://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -51,7 +51,7 @@ window.onload = function() {
                 color: '#00ff00',
                 fillColor: '#00ff00', 
                 fillOpacity: 0.2,
-                radius: 10000 
+                radius: 25000 
             }).addTo(map);
 
             let formattedLocation = "Approximate Location:\n";

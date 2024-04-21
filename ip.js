@@ -7,7 +7,7 @@ window.onload = function() {
         .then(data => {
             const approximateLocation = {
                 "IPv6": data.ip,
-                "IPv4": "",
+                "IPv4": "Failed to retrieve",
                 "Ping": "" ,
                 "Network": data.network,
                 "ASN": data.asn,
@@ -76,7 +76,6 @@ window.onload = function() {
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    document.getElementById("ipAddress").textContent = "Failed to retrieve IPv4";
                 });
 
             fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${approximateLocation.Latitude}&lon=${approximateLocation.Longitude}&appid=1c86a55ad041297a64544ba7c3f2d094`)
